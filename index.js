@@ -21,14 +21,15 @@ const corsOptions = {
 //database connection
 const connect = async() => {
     try {
-        mongoose.connect(process.env.MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
-        mongoose.connection.once('open', () => console.log("DB Connected..."))
-    } catch(err){
-        console.log("mongo database connection failure")
-    }
+        const uri = process.env.MONGO_URI;
+        await mongoose.connect(uri, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        });
+        console.log('Connected to MongoDB Atlas');
+      } catch (err) {
+        console.error('MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you\'re trying to access the database from an IP that isn\'t whitelisted. Make sure your current IP address is on your Atlas cluster\'s IP whitelist:', err);
+      }
 }
 
 //middleware
