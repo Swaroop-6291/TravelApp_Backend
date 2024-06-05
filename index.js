@@ -43,6 +43,10 @@ app.use("/api/v1/reviews",reviewRoute)
 app.use("/api/v1/bookings",bookingRoute)
 
 app.listen(port, ()=>{
-    connect();
-    console.log('sever listening on port',port);
+    try {
+        connect();
+        console.log('sever listening on port',port);
+    } catch (error) {
+        console.log(error)
+    }
 })
